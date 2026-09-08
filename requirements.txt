@@ -1,0 +1,12 @@
+torch
+torchvision
+timm
+numpy
+pillow
+scipy
+scikit-learn
+scikit-image
+numba
+adeval
+tabulate
+tensorboard
