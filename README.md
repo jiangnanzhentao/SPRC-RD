@@ -24,7 +24,7 @@ python generate_mvtec_meta.py --data-root /path/to/dataset
 python run.py -c configs/benchmark/sprc_rd/sprc_rd_256_200e.py -m train data.root=/path/to/dataset
 ```
 
-Training runs for 200 epochs without validation-based checkpoint selection. `training_state.pth` is overwritten after each epoch only for interruption recovery. At epoch 200, the code saves `sprc_rd_final.pth`, fits PSRC using normal training images, and embeds the calibration statistics into that same final model.
+Training runs for 200 epochs. `training_state.pth` is overwritten after each epoch only for interruption recovery. At epoch 200, the code saves `sprc_rd_final.pth`, fits PSRC using normal training images, and embeds the calibration statistics into that same final model.
 
 Resume an interrupted run:
 
@@ -32,25 +32,21 @@ Resume an interrupted run:
 python run.py -c configs/benchmark/sprc_rd/sprc_rd_256_200e.py -m train trainer.resume_dir=SPRC-RD_RUN_DIRECTORY data.root=/path/to/dataset
 ```
 
-## Pretrained Model and Training Log
+## Model and Training Log
 
 The checkpoint used for the reported MVTec-AD results and its training log are provided below:
 
 - Final model: [`checkpoints/sprc_rd_final.pth`](checkpoints/sprc_rd_final.pth)
 - Training log: [`logs/mvtec_train.log`](logs/mvtec_train.log)
 
-The checkpoint is obtained after 200 training epochs and contains the PSRC calibration statistics. No validation-based best-model selection is used.
+The checkpoint is obtained after 200 training epochs and contains the PSRC calibration statistics. 
 
 ## Testing
 
 Evaluate the final checkpoint on MVTec-AD:
 
 ```bash
-python run.py \
-  -c configs/benchmark/sprc_rd/sprc_rd_256_200e.py \
-  -m test \
-  data.root=/path/to/dataset \
-  model.kwargs.model_checkpoint_path=checkpoints/sprc_rd_final.pth
+python run.py -c configs/benchmark/sprc_rd/sprc_rd_256_200e.py -m test data.root=/path/to/dataset model.kwargs.model_checkpoint_path=checkpoints/sprc_rd_final.pth
 ```
 
 The checkpoint must contain the fitted PSRC calibration statistics. Testing an intermediate `training_state.pth` checkpoint is not supported.
@@ -80,7 +76,7 @@ All results are reported in percent (%). The mean anomaly detection score (mAD) 
 
 **mAD: 89.120% (89.1%)**
 
-## Single-image Inference
+## Image Inference
 
 ```bash
 python tools/infer_anomaly_map.py --checkpoint runs/SPRC-RD_RUN_DIRECTORY/sprc_rd_final.pth --image /path/to/image.png --output anomaly_map.npz
