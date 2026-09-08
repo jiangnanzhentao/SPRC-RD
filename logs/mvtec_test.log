@@ -1,0 +1,181 @@
+09/08 09:22:31 AM - ==> configuration
+model_t.name                          : timm_wide_resnet50_2
+model_t.kwargs                        : {'pretrained': False, 'checkpoint_path': '', 'strict': False, 'features_only': True, 'out_indices': [1, 2, 3]}
+model_s.name                          : de_wide_resnet50_2
+model_s.kwargs                        : {'pretrained': False, 'checkpoint_path': '', 'strict': False}
+model.name                            : sprc_rd
+model.kwargs                          : {'pretrained': False, 'checkpoint_path': '', 'strict': True, 'model_t': Namespace(name='timm_wide_resnet50_2', kwargs={'pretrained': False, 'checkpoint_path': '', 'strict': False, 'features_only': True, 'out_indices': [1, 2, 3]}), 'model_s': Namespace(name='de_wide_resnet50_2', kwargs={'pretrained': False, 'checkpoint_path': '', 'strict': False}), 'backbone': 'wide_resnet50_2', 'teacher_init': 'reference_exact', 'teacher_pretrained': True, 'teacher_checkpoint': '', 'model_checkpoint_path': 'runs/SPRC-RD_20260907-185453/sprc_rd_final.pth', 'embed_dims': (128, 160, 256), 'num_prototypes': (4, 4, 4), 'min_topk': (4, 2, 1), 'relation_weights': (0.15, 0.3, 0.45), 'temperature': 0.2, 'fusion_dim': 256, 'fusion_blocks': 2, 'norm': 'bn', 'relation_warmup_epochs': 10, 'relation_ramp_epochs': 10, 'relation_momentum': 0.5, 'relation_smoothing': 1.0, 'quant_scale': 1000000.0, 'cf_posterior_temperature': 0.35, 'cf_relation_floor': 0.0001, 'cf_scale_weights': (0.15, 0.25, 0.6), 'cf_gain_margin': 0.08, 'cf_gain_temperature': 0.12, 'cf_max_intervention': 1.0, 'cf_gate_grad': False, 'decoder_lr': 0.005, 'bottleneck_lr': 0.001}
+data.sampler                          : naive
+data.loader_type                      : pil
+data.loader_type_target               : pil_L
+data.type                             : DefaultAD
+data.root                             : mvtec
+data.meta                             : meta.json
+data.cls_names                        : []
+data.train_transforms                 : [{'type': 'Resize', 'size': (256, 256), 'interpolation': <InterpolationMode.BILINEAR: 'bilinear'>}, {'type': 'CenterCrop', 'size': (256, 256)}, {'type': 'ToTensor'}, {'type': 'Normalize', 'mean': (0.485, 0.456, 0.406), 'std': (0.229, 0.224, 0.225), 'inplace': True}]
+data.test_transforms                  : [{'type': 'Resize', 'size': (256, 256), 'interpolation': <InterpolationMode.BILINEAR: 'bilinear'>}, {'type': 'CenterCrop', 'size': (256, 256)}, {'type': 'ToTensor'}, {'type': 'Normalize', 'mean': (0.485, 0.456, 0.406), 'std': (0.229, 0.224, 0.225), 'inplace': True}]
+data.target_transforms                : [{'type': 'Resize', 'size': (256, 256), 'interpolation': <InterpolationMode.BILINEAR: 'bilinear'>}, {'type': 'CenterCrop', 'size': (256, 256)}, {'type': 'ToTensor'}]
+data.resize_shape                     : [256, 256]
+data.train_size                       : 114
+data.test_size                        : 1725
+data.train_length                     : 3629
+data.test_length                      : 1725
+seed                                  : 111
+size                                  : 256
+epoch_full                            : 200
+fvcore_is                             : False
+fvcore_b                              : 1
+fvcore_c                              : 3
+vis                                   : False
+vis_dir                               : None
+evaluator.kwargs                      : {'metrics': ['mAUROC_sp_max', 'mAP_sp_max', 'mF1_max_sp_max', 'mAUPRO_px', 'mAUROC_px', 'mAP_px', 'mF1_max_px'], 'pooling_ks': None, 'max_step_aupro': 100, 'use_adeval': True}
+optim.lr                              : 0.005
+optim.kwargs                          : {'name': 'adam', 'betas': (0.5, 0.999)}
+trainer.name                          : SPRCRDTrainer
+trainer.checkpoint                    : runs
+trainer.logdir_sub                    : 
+trainer.resume_dir                    : 
+trainer.cuda_deterministic            : True
+trainer.epoch_full                    : 200
+trainer.scheduler_kwargs              : {'name': 'multistep', 'use_iters': True, 'milestones': [100, 120], 'gamma': 0.2}
+trainer.find_unused_parameters        : False
+trainer.sync_BN                       : none
+trainer.dist_BN                       : 
+trainer.scaler                        : none
+trainer.data.batch_size               : 32
+trainer.data.batch_size_per_gpu       : 32
+trainer.data.batch_size_test          : 1
+trainer.data.batch_size_per_gpu_test  : 1
+trainer.data.num_workers_per_gpu      : 4
+trainer.data.drop_last                : False
+trainer.data.pin_memory               : True
+trainer.data.persistent_workers       : True
+trainer.iter                          : 0
+trainer.epoch                         : 0
+trainer.iter_full                     : 22800
+loss.loss_terms                       : [{'type': 'CosLoss', 'name': 'cos', 'avg': False, 'lam': 1.0}]
+loss.clip_grad                        : None
+loss.create_graph                     : False
+loss.retain_graph                     : False
+logging.log_terms_train               : [{'name': 'batch_t', 'fmt': ':>5.3f', 'add_name': 'avg'}, {'name': 'data_t', 'fmt': ':>5.3f'}, {'name': 'optim_t', 'fmt': ':>5.3f'}, {'name': 'lr', 'fmt': ':>7.6f'}, {'name': 'total', 'fmt': ':>6.4f', 'add_name': 'avg'}, {'name': 'rd', 'fmt': ':>6.4f', 'add_name': 'avg'}, {'name': 'cf', 'fmt': ':>6.4f', 'add_name': 'avg'}, {'name': 'gain', 'fmt': ':>6.4f', 'add_name': 'avg'}, {'name': 'img', 'fmt': ':>6.4f', 'add_name': 'avg'}]
+logging.log_terms_test                : [{'name': 'batch_t', 'fmt': ':>5.3f', 'add_name': 'avg'}, {'name': 'cos', 'fmt': ':>5.3f', 'add_name': 'avg'}]
+logging.train_reset_log_per           : 50
+logging.train_log_per                 : 50
+logging.test_log_per                  : 50
+metrics                               : ['mAUROC_sp_max', 'mAP_sp_max', 'mF1_max_sp_max', 'mAUPRO_px', 'mAUROC_px', 'mAP_px', 'mF1_max_px']
+sprc_rd.state_residual_batch_size     : 128
+sprc_rd.state_residual_num_workers    : 4
+sprc_rd.state_residual_export_npz     : False
+sprc_rd.pseudo_fraction               : 0.2
+sprc_rd.pseudo_rd_weight              : 0.5
+sprc_rd.mask_min_blocks               : 1
+sprc_rd.mask_max_blocks               : 2
+sprc_rd.mask_min_side                 : 1
+sprc_rd.mask_max_side                 : 5
+sprc_rd.mask_stripe_prob              : 0.5
+sprc_rd.mask_margin                   : 1
+sprc_rd.mask_max_fraction             : 0.3
+sprc_rd.donor_min_shift               : 2
+sprc_rd.donor_max_shift               : 8
+sprc_rd.donor_candidates              : 4
+sprc_rd.max_source_overlap            : 0.1
+sprc_rd.pseudo_missing_probability    : 0.5
+sprc_rd.pseudo_missing_kernel         : 3
+sprc_rd.img_aug_start_epoch           : 80
+sprc_rd.img_aug_ramp_epochs           : 30
+sprc_rd.img_aug_fraction              : 0.15
+sprc_rd.img_aug_lambda_max            : 0.1
+sprc_rd.img_aug_min_fraction          : 0.05
+sprc_rd.img_aug_max_fraction          : 0.15
+sprc_rd.img_aug_masked_weight         : 1.2
+sprc_rd.img_aug_mean_fill_probability : 0.25
+sprc_rd.img_aug_update_bn_stats       : False
+sprc_rd.lambda_cf                     : 0.2
+sprc_rd.lambda_gain                   : 0.08
+sprc_rd.train_gain_margin             : 0.25
+sprc_rd.clean_gain_tolerance          : 0.05
+cfg_path                              : configs/benchmark/sprc_rd/sprc_rd_256_200e.py
+mode                                  : test
+dist_url                              : env://
+logger_rank                           : 0
+opts                                  : ['data.root=mvtec', 'model.kwargs.model_checkpoint_path=runs/SPRC-RD_20260907-185453/sprc_rd_final.pth']
+task_start_time                       : 466131.805940488
+world_size                            : 1
+rank                                  : 0
+local_rank                            : 0
+dist                                  : False
+ngpus_per_node                        : 1
+nnodes                                : 1
+master                                : True
+logdir                                : runs/SPRC-RD_20260908-092230
+09/08 09:22:31 AM - ==> SPRC-RD parameter report: {'teacher': {'total': 24862528, 'trainable': 0}, 'bottleneck': {'total': 1725280, 'trainable': 1725280}, 'decoder': {'total': 24917504, 'trainable': 24917504}, 'full': {'total': 51505312, 'trainable': 26642784}}
+09/08 09:22:31 AM - ==> SPRC-RD teacher adapter: None
+09/08 09:22:33 AM - Test:   2.90% [50/1725] [batch_t 0.025 (0.044)] [cos 0.291 (0.279)]
+09/08 09:22:38 AM - Test:   5.80% [100/1725] [batch_t 0.025 (0.035)] [cos 0.233 (0.267)]
+09/08 09:22:39 AM - Test:   8.70% [150/1725] [batch_t 0.024 (0.032)] [cos 0.101 (0.242)]
+09/08 09:22:40 AM - Test:  11.59% [200/1725] [batch_t 0.028 (0.030)] [cos 0.216 (0.218)]
+09/08 09:22:41 AM - Test:  14.49% [250/1725] [batch_t 0.027 (0.029)] [cos 0.292 (0.227)]
+09/08 09:22:43 AM - Test:  17.39% [300/1725] [batch_t 0.025 (0.029)] [cos 0.216 (0.227)]
+09/08 09:22:44 AM - Test:  20.29% [350/1725] [batch_t 0.025 (0.028)] [cos 0.377 (0.249)]
+09/08 09:22:45 AM - Test:  23.19% [400/1725] [batch_t 0.025 (0.028)] [cos 0.307 (0.258)]
+09/08 09:22:47 AM - Test:  26.09% [450/1725] [batch_t 0.026 (0.028)] [cos 0.303 (0.271)]
+09/08 09:22:48 AM - Test:  28.99% [500/1725] [batch_t 0.025 (0.027)] [cos 0.335 (0.273)]
+09/08 09:22:49 AM - Test:  31.88% [550/1725] [batch_t 0.025 (0.027)] [cos 0.095 (0.267)]
+09/08 09:22:50 AM - Test:  34.78% [600/1725] [batch_t 0.025 (0.027)] [cos 0.306 (0.256)]
+09/08 09:22:52 AM - Test:  37.68% [650/1725] [batch_t 0.024 (0.027)] [cos 0.283 (0.261)]
+09/08 09:22:53 AM - Test:  40.58% [700/1725] [batch_t 0.025 (0.027)] [cos 0.296 (0.262)]
+09/08 09:22:54 AM - Test:  43.48% [750/1725] [batch_t 0.025 (0.027)] [cos 0.224 (0.264)]
+09/08 09:22:55 AM - Test:  46.38% [800/1725] [batch_t 0.026 (0.027)] [cos 0.108 (0.254)]
+09/08 09:22:57 AM - Test:  49.28% [850/1725] [batch_t 0.032 (0.027)] [cos 0.098 (0.245)]
+09/08 09:22:58 AM - Test:  52.17% [900/1725] [batch_t 0.025 (0.026)] [cos 0.222 (0.242)]
+09/08 09:22:59 AM - Test:  55.07% [950/1725] [batch_t 0.025 (0.026)] [cos 0.177 (0.240)]
+09/08 09:23:01 AM - Test:  57.97% [1000/1725] [batch_t 0.025 (0.026)] [cos 0.186 (0.239)]
+09/08 09:23:02 AM - Test:  60.87% [1050/1725] [batch_t 0.025 (0.026)] [cos 0.432 (0.240)]
+09/08 09:23:03 AM - Test:  63.77% [1100/1725] [batch_t 0.025 (0.026)] [cos 0.231 (0.240)]
+09/08 09:23:04 AM - Test:  66.67% [1150/1725] [batch_t 0.029 (0.026)] [cos 0.147 (0.236)]
+09/08 09:23:06 AM - Test:  69.57% [1200/1725] [batch_t 0.025 (0.026)] [cos 0.153 (0.233)]
+09/08 09:23:07 AM - Test:  72.46% [1250/1725] [batch_t 0.025 (0.026)] [cos 0.139 (0.230)]
+09/08 09:23:08 AM - Test:  75.36% [1300/1725] [batch_t 0.033 (0.026)] [cos 0.144 (0.227)]
+09/08 09:23:09 AM - Test:  78.26% [1350/1725] [batch_t 0.024 (0.026)] [cos 0.153 (0.224)]
+09/08 09:23:14 AM - Test:  81.16% [1400/1725] [batch_t 0.024 (0.026)] [cos 0.151 (0.222)]
+09/08 09:23:15 AM - Test:  84.06% [1450/1725] [batch_t 0.027 (0.026)] [cos 0.262 (0.220)]
+09/08 09:23:16 AM - Test:  86.96% [1500/1725] [batch_t 0.025 (0.026)] [cos 0.204 (0.219)]
+09/08 09:23:17 AM - Test:  89.86% [1550/1725] [batch_t 0.026 (0.026)] [cos 0.170 (0.217)]
+09/08 09:23:19 AM - Test:  92.75% [1600/1725] [batch_t 0.027 (0.026)] [cos 0.179 (0.216)]
+09/08 09:23:20 AM - Test:  95.65% [1650/1725] [batch_t 0.023 (0.026)] [cos 0.098 (0.213)]
+09/08 09:23:21 AM - Test:  98.55% [1700/1725] [batch_t 0.024 (0.026)] [cos 0.131 (0.210)]
+09/08 09:23:22 AM - Test: 100.00% [1725/1725] [batch_t 0.023 (0.026)] [cos 0.175 (0.209)]
+09/08 09:23:23 AM - ==> Metric Time for carpet         :   0.003 (mAUROC_sp_max)	  0.000 (mAP_sp_max)	  0.000 (mF1_max_sp_max)	  0.000 (mAUPRO_px)	  0.000 (mAUROC_px)	  0.000 (mAP_px)	  0.265 (mF1_max_px)	
+09/08 09:23:23 AM - ==> Metric Time for grid           :   0.001 (mAUROC_sp_max)	  0.000 (mAP_sp_max)	  0.000 (mF1_max_sp_max)	  0.000 (mAUPRO_px)	  0.000 (mAUROC_px)	  0.000 (mAP_px)	  0.163 (mF1_max_px)	
+09/08 09:23:24 AM - ==> Metric Time for leather        :   0.001 (mAUROC_sp_max)	  0.000 (mAP_sp_max)	  0.000 (mF1_max_sp_max)	  0.000 (mAUPRO_px)	  0.000 (mAUROC_px)	  0.000 (mAP_px)	  0.273 (mF1_max_px)	
+09/08 09:23:25 AM - ==> Metric Time for tile           :   0.001 (mAUROC_sp_max)	  0.000 (mAP_sp_max)	  0.000 (mF1_max_sp_max)	  0.000 (mAUPRO_px)	  0.000 (mAUROC_px)	  0.000 (mAP_px)	  0.265 (mF1_max_px)	
+09/08 09:23:25 AM - ==> Metric Time for wood           :   0.001 (mAUROC_sp_max)	  0.000 (mAP_sp_max)	  0.000 (mF1_max_sp_max)	  0.000 (mAUPRO_px)	  0.000 (mAUROC_px)	  0.000 (mAP_px)	  0.177 (mF1_max_px)	
+09/08 09:23:25 AM - ==> Metric Time for bottle         :   0.001 (mAUROC_sp_max)	  0.000 (mAP_sp_max)	  0.000 (mF1_max_sp_max)	  0.000 (mAUPRO_px)	  0.000 (mAUROC_px)	  0.000 (mAP_px)	  0.175 (mF1_max_px)	
+09/08 09:23:26 AM - ==> Metric Time for cable          :   0.001 (mAUROC_sp_max)	  0.001 (mAP_sp_max)	  0.000 (mF1_max_sp_max)	  0.000 (mAUPRO_px)	  0.000 (mAUROC_px)	  0.000 (mAP_px)	  0.334 (mF1_max_px)	
+09/08 09:23:27 AM - ==> Metric Time for capsule        :   0.001 (mAUROC_sp_max)	  0.000 (mAP_sp_max)	  0.000 (mF1_max_sp_max)	  0.000 (mAUPRO_px)	  0.000 (mAUROC_px)	  0.000 (mAP_px)	  0.293 (mF1_max_px)	
+09/08 09:23:27 AM - ==> Metric Time for hazelnut       :   0.001 (mAUROC_sp_max)	  0.000 (mAP_sp_max)	  0.000 (mF1_max_sp_max)	  0.000 (mAUPRO_px)	  0.000 (mAUROC_px)	  0.000 (mAP_px)	  0.238 (mF1_max_px)	
+09/08 09:23:28 AM - ==> Metric Time for metal_nut      :   0.001 (mAUROC_sp_max)	  0.000 (mAP_sp_max)	  0.000 (mF1_max_sp_max)	  0.000 (mAUPRO_px)	  0.000 (mAUROC_px)	  0.000 (mAP_px)	  0.255 (mF1_max_px)	
+09/08 09:23:29 AM - ==> Metric Time for pill           :   0.001 (mAUROC_sp_max)	  0.000 (mAP_sp_max)	  0.000 (mF1_max_sp_max)	  0.000 (mAUPRO_px)	  0.000 (mAUROC_px)	  0.000 (mAP_px)	  0.383 (mF1_max_px)	
+09/08 09:23:29 AM - ==> Metric Time for screw          :   0.001 (mAUROC_sp_max)	  0.000 (mAP_sp_max)	  0.000 (mF1_max_sp_max)	  0.000 (mAUPRO_px)	  0.000 (mAUROC_px)	  0.000 (mAP_px)	  0.362 (mF1_max_px)	
+09/08 09:23:30 AM - ==> Metric Time for toothbrush     :   0.002 (mAUROC_sp_max)	  0.001 (mAP_sp_max)	  0.000 (mF1_max_sp_max)	  0.000 (mAUPRO_px)	  0.000 (mAUROC_px)	  0.000 (mAP_px)	  0.089 (mF1_max_px)	
+09/08 09:23:30 AM - ==> Metric Time for transistor     :   0.002 (mAUROC_sp_max)	  0.000 (mAP_sp_max)	  0.000 (mF1_max_sp_max)	  0.000 (mAUPRO_px)	  0.000 (mAUROC_px)	  0.000 (mAP_px)	  0.219 (mF1_max_px)	
+09/08 09:23:31 AM - ==> Metric Time for zipper         :   0.001 (mAUROC_sp_max)	  0.000 (mAP_sp_max)	  0.000 (mF1_max_sp_max)	  0.000 (mAUPRO_px)	  0.000 (mAUROC_px)	  0.000 (mAP_px)	  0.345 (mF1_max_px)	
+09/08 09:23:31 AM - 
+|    Name    |  mAUROC_sp_max  |  mAP_sp_max  |  mF1_max_sp_max  |  mAUPRO_px  |  mAUROC_px  |  mAP_px  |  mF1_max_px  |
+|:----------:|:---------------:|:------------:|:----------------:|:-----------:|:-----------:|:--------:|:------------:|
+|   carpet   |     98.596      |    99.604    |      97.143      |   96.600    |   99.338    |  74.773  |    68.390    |
+|    grid    |     100.000     |   100.000    |     100.000      |   97.740    |   99.387    |  56.136  |    54.782    |
+|  leather   |     100.000     |   100.000    |     100.000      |   99.135    |   99.723    |  69.290  |    64.380    |
+|    tile    |     99.495      |    99.793    |      98.810      |   88.565    |   97.194    |  63.712  |    70.606    |
+|    wood    |     99.211      |    99.745    |      98.361      |   94.424    |   97.089    |  60.625  |    61.091    |
+|   bottle   |     100.000     |   100.000    |     100.000      |   96.880    |   98.992    |  84.253  |    77.979    |
+|   cable    |     98.782      |    99.224    |      97.802      |   93.702    |   98.197    |  63.730  |    64.934    |
+|  capsule   |     97.886      |    99.526    |      97.696      |   95.789    |   98.751    |  51.930  |    51.824    |
+|  hazelnut  |     100.000     |   100.000    |     100.000      |   96.854    |   99.217    |  70.714  |    69.794    |
+| metal_nut  |     100.000     |   100.000    |     100.000      |   95.975    |   98.212    |  86.550  |    83.890    |
+|    pill    |     97.736      |    99.606    |      97.143      |   96.779    |   97.996    |  77.612  |    72.554    |
+|   screw    |     98.196      |    99.382    |      96.296      |   96.620    |   99.392    |  54.196  |    54.160    |
+| toothbrush |     99.167      |    99.681    |      96.774      |   94.039    |   99.213    |  59.527  |    65.668    |
+| transistor |     99.292      |    99.254    |      98.734      |   91.510    |   94.713    |  63.130  |    60.172    |
+|   zipper   |     99.842      |    99.960    |      99.578      |   95.413    |   98.142    |  67.837  |    65.454    |
+|    Avg     |     99.213      |    99.718    |      98.556      |   95.335    |   98.370    |  66.934  |    65.712    |
