@@ -38,6 +38,7 @@ The checkpoint used for the reported MVTec-AD results and its training log are p
 
 - Final model: [`checkpoints/sprc_rd_final.pth`](checkpoints/sprc_rd_final.pth)
 - Training log: [`logs/mvtec_train.log`](logs/mvtec_train.log)
+- Test log: [`logs/mvtec_test.log`](logs/mvtec_test.log)
 
 The checkpoint is obtained after 200 training epochs and contains the PSRC calibration statistics. 
 
